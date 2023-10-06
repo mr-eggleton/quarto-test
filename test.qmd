@@ -1,12 +1,32 @@
 ---
 title: "Quarto Basics"
 format:
-  html:
+  html: 
+    default: true
     code-fold: true
+  revealjs: 
+    
+    output-file: document-revealjs.html
+    codefocus : true
+filters:
+  - code-fullscreen
+  - diagram
 jupyter: python3
 ---
 
+## is this working??
+
 For a demonstration of a line plot on a polar axis, see @fig-polar.
+
+```{.dot}
+//| label: fig-boring
+//| fig-cap: "A boring Graphviz graph."
+digraph boring {
+  A -> B;
+}
+```
+
+## test
 
 ```{python}
 #| label: fig-polar
@@ -25,3 +45,95 @@ ax.set_rticks([0.5, 1, 1.5, 2])
 ax.grid(True)
 plt.show()
 ```
+
+# Graphviz test
+
+```{dot}
+graph G {
+  layout=neato
+  run -- intr;
+  intr -- runbl;
+  runbl -- run;
+  run -- kernel;
+  kernel -- zombie;
+  kernel -- sleep;
+  kernel -- runmem;
+  sleep -- swap;
+  swap -- runswap;
+  runswap -- new;
+  runswap -- runmem;
+  new -- runmem;
+  sleep -- runmem;
+}
+```
+
+# Flowchart test
+
+```{mermaid}
+flowchart LR
+  A[Hard edge] --> B(Round edge)
+  B --> C{Decision}
+  C --> D[Result one]
+  C --> E[Result two]
+```
+
+
+## midnmap test
+
+```{mermaid}
+
+mindmap
+  root((mindmap))
+    Origins
+      Long history
+      ::icon(fa fa-book)
+      Popularisation
+        British popular psychology author Tony Buzan
+    Research
+      On effectivness<br/>and features
+      On Automatic creation
+        Uses
+            Creative techniques
+            Strategic planning
+            Argument mapping
+    Tools
+      Pen and paper
+      Mermaid
+
+
+```
+
+# ERD test
+
+```{mermaid}
+erDiagram
+    USER {
+        int userid PK
+        string email UK
+    }
+
+    VOTER {
+        int voterid PK
+        string name UK
+        int groupid FK
+    }
+    
+    VOTE {
+        int voterid FK
+        int voteeid FK
+        int userid FK
+    }
+
+    GROUP {
+        int groupid PK
+        string groupname UK
+    }
+
+    VOTER |o--o{ VOTE : "vote 1"
+    VOTER |o--o{ VOTE : "vote 2"
+    USER |o--o{ VOTE : "enter the vote"
+    GROUP |o--o{ VOTER : ""
+    
+```
+
+
